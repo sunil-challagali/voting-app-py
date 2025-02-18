@@ -70,8 +70,8 @@ resource "aws_instance" "application" {
                 sudo systemctl start docker
                 # Clone the GitHub repository
                 sudo apt-get install -y git
-                git clone https://github.com/sunil-challagali/voting-app-py.git /home/ubuntu/application
-                cd /home/ubuntu/application
+                git clone https://github.com/sunil-challagali/voting-app-py.git /home/ubuntu/app
+                cd /home/ubuntu/app
                 docker build -t my-flask-app:latest .
                 docker run -d -p 5000:5000 my-flask-app:latest
                 EOF
