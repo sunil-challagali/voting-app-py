@@ -8,9 +8,6 @@ terraform {
     region = "ap-south-1"
   }
 }
-data "aws_route53_zone" "main" {
-  name = "cloudwithsunil.xyz"
-}
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 }
@@ -86,13 +83,6 @@ resource "aws_instance" "application" {
 
 resource "aws_eip" "app_eip" {
   instance = aws_instance.application.id
-}
-resource "aws_route53_record" "app_record" {
-  zone_id = data.aws_route53_zone.main.zone_id  # Refer to the existing hosted zone resource
-  name    = "www.sunilwithcloud.xyz"          # Replace with your subdomain name
-  type    = "A"
-  ttl     = "300"
-  records = [aws_eip.app_eip.public_ip]
 }
 output "eip_address" {
   value = aws_eip.app_eip.public_ip
