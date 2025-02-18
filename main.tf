@@ -63,10 +63,11 @@ resource "aws_instance" "application" {
 
   user_data = <<-EOF
                 #!/bin/bash
-                sudo apt-get update -y
-                sudo apt-get install -y docker.io
+                sudo apt update && sudo apt install net-tools
+                curl https://get.docker.com/ | bash
+                sudo usermod -aG docker ${USER}
+                sudo chmod 666 /var/run/docker.sock 
                 sudo systemctl start docker
-                sudo usermod -a -G docker ubuntu
                 # Clone the GitHub repository
                 sudo apt-get install -y git
                 git clone https://github.com/sunil-challagali/voting-app-py.git /home/ubuntu/application
