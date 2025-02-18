@@ -58,7 +58,6 @@ if __name__ == '__main__':
                 poll_id INTEGER NOT NULL,
                 option TEXT NOT NULL,
                 FOREIGN KEY (poll_id) REFERENCES polls (id)
-                UNIQUE (poll_id, option)
             )
         ''')
         cursor.execute('''
@@ -76,10 +75,6 @@ if __name__ == '__main__':
         cursor.execute("INSERT INTO options (poll_id, option) VALUES (1, 'JavaScript')")
         cursor.execute("INSERT INTO options (poll_id, option) VALUES (1, 'Java')")
         
-        cursor.execute("INSERT INTO polls (question) VALUES ('What is your favorite color?')")
-        cursor.execute("INSERT INTO options (poll_id, option) VALUES (2, 'Red')")
-        cursor.execute("INSERT INTO options (poll_id, option) VALUES (2, 'Blue')")
-        cursor.execute("INSERT INTO options (poll_id, option) VALUES (2, 'Green')")
         
         conn.commit()
         conn.close()
