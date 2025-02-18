@@ -36,7 +36,7 @@ resource "aws_security_group" "allow_web" {
   }
 }
 
-resource "aws_instance" "app" {
+resource "aws_instance" "application" {
   ami           = "ami-00bb6a80f01f03502" # Amazon Linux 2
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet.id
