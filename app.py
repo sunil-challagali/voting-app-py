@@ -68,7 +68,13 @@ if __name__ == '__main__':
                 FOREIGN KEY (poll_id) REFERENCES polls (id)
             )
         ''')
+        
+        # Add initial poll data
+        cursor.execute("INSERT INTO polls (question) VALUES ('What is your favorite programming language?')")
+        cursor.execute("INSERT INTO options (poll_id, option) VALUES (1, 'Python')")
+        cursor.execute("INSERT INTO options (poll_id, option) VALUES (1, 'JavaScript')")
+        cursor.execute("INSERT INTO options (poll_id, option) VALUES (1, 'Java')")
+        
         conn.commit()
         conn.close()
     app.run(host='0.0.0.0', port=5000, debug=True)
-
