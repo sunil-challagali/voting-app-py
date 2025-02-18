@@ -64,13 +64,13 @@ resource "aws_instance" "application" {
   user_data = <<-EOF
                 #!/bin/bash
                 sudo apt-get update -y
-                sudo apt install docker -y
-                sudo service docker start
+                sudo apt-get install -y docker.io
+                sudo systemctl start docker
                 sudo usermod -a -G docker ubuntu
                 # Clone the GitHub repository
-                sudo apt install -y git
-                git clone https://github.com/sunil-challagali/voting-app-py.git /home/ubuntu/app
-                cd /home/ubuntu/app
+                sudo apt-get install -y git
+                git clone https://github.com/sunil-challagali/voting-app-py.git /home/ubuntu/application
+                cd /home/ubuntu/application
                 docker build -t my-flask-app:latest .
                 docker run -d -p 5000:5000 my-flask-app:latest
                 EOF
