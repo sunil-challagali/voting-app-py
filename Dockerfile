@@ -17,4 +17,4 @@ EXPOSE 5000
 ENV NAME World
 
 # Run application.py using python3 when the container launches
-CMD ["python3", "application.py"]
+CMD ["python3", "app.py"]
