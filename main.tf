@@ -92,7 +92,7 @@ resource "aws_route53_record" "app_record" {
   name    = "www.sunilwithcloud.xyz"          # Replace with your subdomain name
   type    = "A"
   ttl     = "300"
-  records = [aws_eip.application_eip.public_ip]
+  records = [aws_eip.app_eip.public_ip]
 }
 output "eip_address" {
   value = aws_eip.app_eip.public_ip
