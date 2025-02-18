@@ -42,6 +42,11 @@ resource "aws_instance" "app" {
                 sudo yum install docker -y
                 sudo service docker start
                 sudo usermod -a -G docker ec2-user
+                # Clone the GitHub repository
+                sudo yum install -y git
+                git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY.git /home/ec2-user/app
+                cd /home/ec2-user/app
+                docker build -t my-flask-app:latest .
                 docker run -d -p 5000:5000 my-flask-app:latest
                 EOF
 
