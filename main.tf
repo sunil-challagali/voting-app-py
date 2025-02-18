@@ -62,7 +62,7 @@ resource "aws_instance" "application" {
 }
 
 resource "aws_eip" "app_eip" {
-  instance = aws_instance.app.id
+  instance = aws_instance.application.id
 }
 
 output "eip_address" {
