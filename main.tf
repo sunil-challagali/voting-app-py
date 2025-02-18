@@ -1,7 +1,13 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "ap-south-1"
 }
-
+terraform {
+  backend "s3" {
+    bucket = "my-terraform-state-bucket-sunil7756"
+    key    = "terraform-python/terraform.tfstate"
+    region = "ap-south-1"
+  }
+}
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 }
@@ -31,21 +37,21 @@ resource "aws_security_group" "allow_web" {
 }
 
 resource "aws_instance" "app" {
-  ami           = "ami-0c55b159cbfafe1f0" # Amazon Linux 2
+  ami           = "ami-00bb6a80f01f03502" # Amazon Linux 2
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet.id
   security_groups = [aws_security_group.allow_web.name]
 
   user_data = <<-EOF
                 #!/bin/bash
-                sudo yum update -y
-                sudo yum install docker -y
+                sudo apt-get update -y
+                sudo apt install docker -y
                 sudo service docker start
-                sudo usermod -a -G docker ec2-user
+                sudo usermod -a -G docker ubuntu
                 # Clone the GitHub repository
-                sudo yum install -y git
-                git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY.git /home/ec2-user/app
-                cd /home/ec2-user/app
+                sudo apt install -y git
+                git clone https://github.com/sunil-challagali/voting-app-py.git /home/ubuntu/app
+                cd /home/ubuntu/app
                 docker build -t my-flask-app:latest .
                 docker run -d -p 5000:5000 my-flask-app:latest
                 EOF
