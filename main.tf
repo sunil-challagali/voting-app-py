@@ -40,7 +40,7 @@ resource "aws_instance" "application" {
   ami           = "ami-00bb6a80f01f03502" # Amazon Linux 2
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet.id
-  vpc_security_group_ids = [aws_security_group.allow_web.name]
+  vpc_security_group_ids = [aws_security_group.allow_web.id]
 
   user_data = <<-EOF
                 #!/bin/bash
