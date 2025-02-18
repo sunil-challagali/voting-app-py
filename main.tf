@@ -65,7 +65,7 @@ resource "aws_instance" "application" {
                 #!/bin/bash
                 sudo apt update && sudo apt install net-tools
                 curl https://get.docker.com/ | bash
-                sudo usermod -aG docker ${USER}
+                sudo usermod -aG docker ubuntu
                 sudo chmod 666 /var/run/docker.sock 
                 sudo systemctl start docker
                 # Clone the GitHub repository
